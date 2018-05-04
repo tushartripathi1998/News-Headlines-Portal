@@ -1,5 +1,12 @@
 import time
 import _thread
+from flask import Flask, render_template,redirect
+
+app=Flask(__name__)
+
+@app.route('/headlines')
+def enterdetail(a) -> 'html' :
+    return render_template('entry.html',the_title="Welcome to the headlines",content=a)
 
 def fun(thread,de) :
     while(1) :
@@ -7,6 +14,8 @@ def fun(thread,de) :
         todos=open("news.txt",'r')
         for i in todos :
             if (len(i)<50 and i[0]!=" "):
-                print(i)
+                enterdetail(i)
         todos.close()
-_thread.start_new_thread(fun,("thread",5))
+
+if __name__="__main__" :
+    app.run(debug==True)
